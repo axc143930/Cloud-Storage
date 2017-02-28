@@ -25,16 +25,16 @@ public class Server implements Runnable {
  public void run() {
 
      try {
-    serverSocket = new ServerSocket(4445);
-    socket = serverSocket.accept();
+    serverSocket = new ServerSocket(4445);// create server socket
+    socket = serverSocket.accept(); //accept client request
     DataInputStream dIn = new DataInputStream(socket.getInputStream());
     DataOutputStream outToClient = new DataOutputStream(socket.getOutputStream());
 
     System.out.println("Connected");
-    File myFile = new File("C:\\Users\\Akash\\Desktop\\image.jpg");
+    File myFile = new File("C:\\Users\\Akash\\Desktop\\image.jpg");// location of file in local disk
     long flength = myFile.length();
     System.out.println("File Length"+flength);
-    outToClient.writeLong(flength);
+    outToClient.writeLong(flength);// send length of file to client
     FileInputStream fis;
     BufferedInputStream bis;
     byte[] mybytearray = new byte[8192];
