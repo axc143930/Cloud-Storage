@@ -28,7 +28,6 @@ public class Server implements Runnable {
     serverSocket = new ServerSocket(4445);
     socket = serverSocket.accept();
     DataInputStream dIn = new DataInputStream(socket.getInputStream());
-   // OutputStream os = socket.getOutputStream();
     DataOutputStream outToClient = new DataOutputStream(socket.getOutputStream());
 
     System.out.println("Connected");
@@ -45,13 +44,7 @@ public class Server implements Runnable {
     System.out.println("Sending " + myFile.getAbsolutePath() + "(" + myFile.length() + " bytes)");
        while ((theByte = bis.read()) != -1) {
      outToClient.write(theByte);
-     // bos.flush();
      }
-    /*int count;
-    BufferedOutputStream bos= new BufferedOutputStream(os);
-    while ((count = bis.read(mybytearray))>0) {
-        bos.write(mybytearray, 0, count);
-    }*/
 
     bis.close();
     socket.close();
