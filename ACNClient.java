@@ -42,16 +42,14 @@ public class ACNClient {
 	 	
 	 	//code to get the list of files and their checksum from server
 	 	
-	 	File cFiles = new File("C:\\Users\\Rucha\\Desktop\\ACNDemo\\"); // path of the folder at desktop client 
-	 	//File sFiles = new File("C:\\Users\\Administrator\\Desktop\\ACN\\");
+	 	File cFiles = new File("C:\\Users\\Akash\\Desktop\\ACNDemo\\"); // path of the folder at desktop client 
 		File[] cFileList = cFiles.listFiles();		
 		System.out.println(cFileList.length);
 		
 		Checksum checksum = new Checksum();
 		List<String> filesToBeSent= new ArrayList<String>();
-		//SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 		Map <String,Date> cDetails = new HashMap<String,Date>();
-		cDetails =(Map<String, Date>) ois.readObject();//new HashMap<String,Map<Long,StringBuffer> >();
+		cDetails =(Map<String, Date>) ois.readObject();
 		System.out.println("got details");
 		List<StringBuffer> cDetails1 = new ArrayList<StringBuffer>();
 		cDetails1 = (List<StringBuffer>) ois.readObject();
@@ -62,10 +60,6 @@ public class ACNClient {
 		keyMap=cDetails.keySet();
 		int i=0;
 		for(File file : cFileList){
-			//if(file.length() != 0)
-			{
-				//s=;// keyMap contains all the filenames from server
-				
 				System.out.println("inside for");
 				if(keyMap.contains(file.getName())){
 					//find if checksum is same or the client file is edited after sent to server
@@ -82,8 +76,6 @@ public class ACNClient {
 					}else{
 						filesToBeSent.add(file.getName());
 					}
-			}
-			i++;
 		}
 		System.out.println(filesToBeSent.toString());
 		oos.writeObject(filesToBeSent);
@@ -91,8 +83,7 @@ public class ACNClient {
 	    for(String f : filesToBeSent){	 
 		    DataOutputStream outToClient = new DataOutputStream(sock.getOutputStream());
 		    System.out.println("Connected");
-		    //dynamic path
-		    String dynamicPath = "C:\\Users\\Rucha\\Desktop\\ACNDemo\\"+f;
+		    String dynamicPath = "C:\\Users\\Akash\\Desktop\\ACNDemo\\"+f;
 		    System.out.println(dynamicPath);
 		    File myFile = new File(dynamicPath);
 		    long flength = myFile.length();
